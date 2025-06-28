@@ -441,122 +441,87 @@
         </section>
 
         <section>
-          <h3>🔧 Preparar el Entorno</h3>
-          <div class="code-highlight">
+          <h3 class="fade-in-up">🔧 Preparar el entorno</h3>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 1:</strong> Instalar PuLP</p>
             <pre><code class="language-python">
-# Paso 1: Instalar PuLP
-!pip install pulp
-
-# Paso 2: Importar la librería
-import pulp
+# Instalar PuLP
+pip install pulp
+            </code></pre>
+          </div>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 2:</strong> Importar las librerías necesarias</p>
+            <pre><code class="language-python">
+# Importar librerías
+from pulp import *
+import matplotlib.pyplot as plt
+import numpy as np
             </code></pre>
           </div>
         </section>
 
         <section>
-          <h3>📝 Definir el Modelo en Python</h3>
-          <div class="fragment">
-            <p><span class="step-number">3</span><strong>Crear el problema de maximización</strong></p>
+          <h3 class="fade-in-up">📝 Definir el modelo en Python</h3>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 3:</strong> Crear el problema de maximización</p>
             <pre><code class="language-python">
-problema = pulp.LpProblem("Problema_Paquetes_Escolares", pulp.LpMaximize)
+# Crear el problema
+prob = LpProblem("Paquetes_Escolares", LpMaximize)
             </code></pre>
           </div>
-
-          <div class="fragment">
-            <p><span class="step-number">4</span><strong>Definir las variables de decisión</strong></p>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 4:</strong> Definir las variables de decisión</p>
             <pre><code class="language-python">
-x = pulp.LpVariable('Paquetes_Tipo_1', lowBound=0, cat='Integer')
-y = pulp.LpVariable('Paquetes_Tipo_2', lowBound=0, cat='Integer')
+# Variables de decisión
+x = LpVariable("Paquetes_Tipo_1", 0, None, LpInteger)
+y = LpVariable("Paquetes_Tipo_2", 0, None, LpInteger)
             </code></pre>
           </div>
-
-          <div class="fragment">
-            <p><span class="step-number">5</span><strong>Definir la función objetivo</strong></p>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 5:</strong> Definir la función objetivo</p>
             <pre><code class="language-python">
-problema += 6.5 * x + 7 * y, "Ganancia_Total"
-            </code></pre>
-          </div>
-        </section>
-
-        <section>
-          <h3>🔒 Restricciones y Resolución</h3>
-          <div class="fragment">
-            <p><span class="step-number">6</span><strong>Agregar las restricciones</strong></p>
-            <pre><code class="language-python">
-problema += 2 * x + 3 * y <= 600, "Restriccion_Cuadernos"
-problema += x + y <= 500, "Restriccion_Carpetas"
-problema += 2 * x + y <= 400, "Restriccion_Bolígrafos"
-            </code></pre>
-          </div>
-
-          <div class="fragment">
-            <p><span class="step-number">7</span><strong>Resolver el problema</strong></p>
-            <pre><code class="language-python">
-problema.solve()
+# Función objetivo
+prob += 6.50*x + 7.00*y, "Ganancia_Total"
             </code></pre>
           </div>
         </section>
 
         <section>
-          <h3>📊 Ver el Resultado</h3>
-          <div>
-            <p><span class="step-number">8</span><strong>Mostrar los resultados</strong></p>
+          <h3 class="fade-in-up">🔒 Restricciones y resolución</h3>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 6:</strong> Agregar las restricciones</p>
             <pre><code class="language-python">
-if pulp.LpStatus[problema.status] == "Optimal":
-    print("✅ Solución óptima encontrada:")
-    print(f"📦 Paquetes tipo 1: {x.varValue}")
-    print(f"📦 Paquetes tipo 2: {y.varValue}")
-    print(f"💰 Ganancia total: €{pulp.value(problema.objective):.2f}")
+# Restricciones
+prob += 2*x + 3*y <= 600, "Cuadernos"
+prob += x + y <= 500, "Carpetas"
+prob += 2*x + y <= 400, "Boligrafos"
+            </code></pre>
+          </div>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 7:</strong> Resolver el problema</p>
+            <pre><code class="language-python">
+# Resolver
+prob.solve()
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h3 class="fade-in-up">📊 Ver el resultado</h3>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 8:</strong> Mostrar los resultados</p>
+            <pre><code class="language-python">
+# Verificar estado
+print("Estado:", LpStatus[prob.status])
+
+# Mostrar resultados
+if LpStatus[prob.status] == "Optimal":
+    print("Paquetes Tipo 1:", value(x))
+    print("Paquetes Tipo 2:", value(y))
+    print("Ganancia Total: €", value(prob.objective))
 else:
-    print("❌ No se encontró una solución óptima.")
+    print("No se encontró solución óptima")
             </code></pre>
-          </div>
-        </section>
-
-        <section>
-          <h3>📋 Código Completo</h3>
-          <div class="code-highlight">
-            <pre><code class="language-python">
-# ==========================================
-# OPTIMIZACIÓN DE PAQUETES ESCOLARES
-# ==========================================
-
-# Paso 1: Instalar PuLP
-!pip install pulp
-
-# Paso 2: Importar la librería
-import pulp
-
-# Paso 3: Crear el problema de maximización
-problema = pulp.LpProblem("Problema_Paquetes_Escolares", pulp.LpMaximize)
-
-# Paso 4: Definir las variables de decisión
-x = pulp.LpVariable('Paquetes_Tipo_1', lowBound=0, cat='Integer')
-y = pulp.LpVariable('Paquetes_Tipo_2', lowBound=0, cat='Integer')
-
-# Paso 5: Definir la función objetivo
-problema += 6.5 * x + 7 * y, "Ganancia_Total"
-
-# Paso 6: Agregar las restricciones
-problema += 2 * x + 3 * y <= 600, "Restriccion_Cuadernos"
-problema += x + y <= 500, "Restriccion_Carpetas"
-problema += 2 * x + y <= 400, "Restriccion_Bolígrafos"
-
-# Paso 7: Resolver el problema
-problema.solve()
-
-# Paso 8: Mostrar los resultados
-if pulp.LpStatus[problema.status] == "Optimal":
-    print("✅ Solución óptima encontrada:")
-    print(f"📦 Paquetes tipo 1: {x.varValue}")
-    print(f"📦 Paquetes tipo 2: {y.varValue}")
-    print(f"💰 Ganancia total: €{pulp.value(problema.objective):.2f}")
-else:
-    print("❌ No se encontró una solución óptima.")
-            </code></pre>
-            <p style="margin-top: 1vh; font-size: 0.9vw; color: #38ef7d; text-align: center;">
-              <strong>🎯 ¡Código completo y listo para ejecutar!</strong>
-            </p>
           </div>
         </section>
       </section>
@@ -686,6 +651,297 @@ else:
           <div class="achievement-badge fragment bounce-in">📊</div>
           <div class="achievement-badge fragment bounce-in">🐍</div>
           <div class="achievement-badge fragment bounce-in">💡</div>
+        </div>
+        <p class="fragment fade-in-up">
+          <strong>Dante Passone & Braian Tormey</strong><br>
+          Grupo 2 - Análisis de Optimización
+        </p>
+        <p class="fragment fade-in-up">
+          <strong>¡Transformando datos en decisiones inteligentes!</strong>
+        </p>
+      </section>
+
+      <!-- SEGUNDO EJERCICIO - PROBLEMA DEL ORFEBRE -->
+      <section class="slide-epic">
+        <h1 class="fade-in-up">💎 OPTIMIZACIÓN DE JOYAS</h1>
+        <h2 class="fragment fade-in-up">El Arte de la Programación Lineal</h2>
+        <p class="fragment fade-in-up"><strong>Maximizando el Valor de los Metales Preciosos</strong></p>
+        <div class="flex-container fade-in-up">
+          <div class="tech-item fragment bounce-in">💍 Joyas</div>
+          <div class="tech-item fragment bounce-in">🥇 Oro</div>
+          <div class="tech-item fragment bounce-in">🥈 Plata</div>
+          <div class="tech-item fragment bounce-in">💰 Beneficio</div>
+        </div>
+        <p class="fragment fade-in-up"><strong>Preparados para optimizar la joyería artesanal</strong></p>
+      </section>
+
+      <!-- ENUNCIADO SEGUNDO EJERCICIO -->
+      <section class="slide-problem">
+        <h2 class="fade-in-up">💎 Enunciado del Problema</h2>
+        <p class="fragment fade-in-left">
+          Un orfebre fabrica dos tipos de joyas. Las del tipo A precisan <strong>1 gr de oro</strong> y <strong>1,5 gr de plata</strong>, 
+          vendiéndose a <strong>40 euros</strong> cada una. Para la fabricación de las de tipo B emplea <strong>1,5 gr de oro</strong> 
+          y <strong>1 gr de plata</strong>, y las vende a <strong>50 euros</strong>. El orfebre tiene solo en el taller 
+          <strong>750 gr de cada uno de los metales</strong>.
+        </p>
+        <div class="flex-container fade-in-up">
+          <div class="flex-item fragment scale-in">
+            <h4>💍 Joya Tipo A</h4>
+            <p>1 gr oro + 1,5 gr plata</p>
+            <span class="price-highlight glow-subtle">€40</span>
+          </div>
+          <div class="flex-item fragment scale-in">
+            <h4>💎 Joya Tipo B</h4>
+            <p>1,5 gr oro + 1 gr plata</p>
+            <span class="price-highlight glow-subtle">€50</span>
+          </div>
+        </div>
+        <p class="fragment fade-in-up"><strong>¿Cuántas joyas ha de fabricar de cada clase para obtener un beneficio máximo?</strong></p>
+      </section>
+
+      <!-- DATOS SEGUNDO EJERCICIO -->
+      <section class="slide-data">
+        <section>
+          <h2 class="fade-in-up">📊 Datos Identificados</h2>
+          <h3 class="fragment fade-in-left">🏪 Stock Disponible</h3>
+          <div class="grid-container fade-in-up">
+            <div class="grid-item fragment bounce-in">
+              <h4>🥇 Oro</h4>
+              <p class="stock-number float">750 gr</p>
+            </div>
+            <div class="grid-item fragment bounce-in">
+              <h4>🥈 Plata</h4>
+              <p class="stock-number float">750 gr</p>
+            </div>
+          </div>
+          <p class="fragment fade-in-up"><strong>🎯 Objetivo:</strong> Maximizar el beneficio respetando el stock disponible</p>
+        </section>
+
+        <section class="slide-restrictions">
+          <h2 class="fade-in-up">🔒 Límites y Restricciones</h2>
+          <div class="grid-container fade-in-up">
+            <div class="code-highlight fragment fade-in-left">
+              <h4>🥇 Oro</h4>
+              <p><strong>x + 1.5y ≤ 750</strong></p>
+              <small>La cantidad de oro no puede superar los 750 gramos</small>
+            </div>
+            <div class="code-highlight fragment fade-in-left">
+              <h4>🥈 Plata</h4>
+              <p><strong>1.5x + y ≤ 750</strong></p>
+              <small>La cantidad de plata no puede superar los 750 gramos</small>
+            </div>
+            <div class="code-highlight fragment fade-in-left">
+              <h4>✅ No Negatividad</h4>
+              <p><strong>x ≥ 0, y ≥ 0</strong></p>
+              <small>No se pueden fabricar cantidades negativas</small>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- PYTHON SEGUNDO EJERCICIO -->
+      <section class="slide-python">
+        <section>
+          <h2 class="fade-in-up">🐍 Resolviendo con Python</h2>
+          <p class="fragment fade-in-left">
+            Utilizaremos <strong>Python</strong> y la librería <code>PuLP</code> para modelar y resolver 
+            este problema de optimización de joyas mediante <strong>programación lineal</strong>.
+          </p>
+          <div class="python-logo-container fragment bounce-in">
+            <img src="logo_python.png" alt="Logo de Python" style="max-width: 20vw; filter: brightness(1.3) contrast(1.5); margin: 2vh auto; display: block;">
+          </div>
+          <p class="fragment fade-in-up"><strong>PuLP</strong> nos permite resolver problemas de optimización de forma eficiente</p>
+        </section>
+
+        <section>
+          <h3 class="fade-in-up">🔧 Preparar el entorno</h3>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 1:</strong> Instalar PuLP</p>
+            <pre><code class="language-python">
+# Instalar PuLP
+pip install pulp
+            </code></pre>
+          </div>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 2:</strong> Importar la librería</p>
+            <pre><code class="language-python">
+# Importar librería
+import pulp
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h3 class="fade-in-up">📝 Definir el modelo en Python</h3>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 3:</strong> Crear el problema de maximización</p>
+            <pre><code class="language-python">
+# Crear el problema
+problema = pulp.LpProblem("Problema_Joyas", pulp.LpMaximize)
+            </code></pre>
+          </div>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 4:</strong> Definir las variables de decisión</p>
+            <pre><code class="language-python">
+# Variables de decisión
+x = pulp.LpVariable('Joyas_Tipo_A', lowBound=0, cat='Integer')
+y = pulp.LpVariable('Joyas_Tipo_B', lowBound=0, cat='Integer')
+            </code></pre>
+          </div>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 5:</strong> Definir la función objetivo</p>
+            <pre><code class="language-python">
+# Función objetivo
+problema += 40 * x + 50 * y, "Beneficio_Total"
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h3 class="fade-in-up">🔒 Restricciones y resolución</h3>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 6:</strong> Agregar las restricciones</p>
+            <pre><code class="language-python">
+# Restricciones
+problema += 1 * x + 1.5 * y <= 750, "Restriccion_Oro"
+problema += 1.5 * x + 1 * y <= 750, "Restriccion_Plata"
+            </code></pre>
+          </div>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 7:</strong> Resolver el problema</p>
+            <pre><code class="language-python">
+# Resolver
+problema.solve()
+            </code></pre>
+          </div>
+        </section>
+
+        <section>
+          <h3 class="fade-in-up">📊 Ver el resultado</h3>
+          <div class="fragment fade-in-up">
+            <p><strong>Paso 8:</strong> Mostrar los resultados</p>
+            <pre><code class="language-python">
+# Mostrar resultados
+if pulp.LpStatus[problema.status] == "Optimal":
+    print("✅ Solución óptima encontrada:")
+    print(f"💎 Joyas tipo A a fabricar: {x.varValue}")
+    print(f"💍 Joyas tipo B a fabricar: {y.varValue}")
+    print(f"💰 Beneficio total: €{pulp.value(problema.objective):.2f}")
+else:
+    print("❌ No se encontró una solución óptima.")
+            </code></pre>
+          </div>
+        </section>
+      </section>
+
+      <!-- RESULTADOS SEGUNDO EJERCICIO -->
+      <section class="slide-results">
+        <section>
+          <h2 class="fade-in-up">🎉 Solución Óptima Obtenida</h2>
+          <div class="grid-container fade-in-up">
+            <div class="grid-item fragment bounce-in">
+              <h4>💍 Joyas Tipo A</h4>
+              <p class="solution-number float">300</p>
+            </div>
+            <div class="grid-item fragment bounce-in">
+              <h4>💎 Joyas Tipo B</h4>
+              <p class="solution-number float">300</p>
+            </div>
+            <div class="grid-item fragment bounce-in">
+              <h4>💰 Beneficio Total</h4>
+              <p class="solution-number float glow-subtle">€27.000</p>
+            </div>
+          </div>
+          <p class="fragment fade-in-up">🎯 Esta es la combinación que maximiza los beneficios!</p>
+        </section>
+
+        <section class="slide-graph">
+          <h3 class="fade-in-up">📈 Visualización Gráfica</h3>
+          <p class="fragment fade-in-left">
+            Este gráfico muestra las restricciones de oro y plata, la región factible, 
+            la solución óptima y el punto donde se alcanza el beneficio máximo.
+          </p>
+          <div class="flex-container fragment fade-in-up">
+            <span style="color: #ffd700;"><strong>🥇 Oro</strong></span>
+            <span style="color: #c0c0c0;"><strong>🥈 Plata</strong></span>
+          </div>
+          <img src="grafico_joyas.png" alt="Gráfico del problema de joyas" class="fragment scale-in" style="max-width: 80%; margin: 2vh auto;">
+        </section>
+      </section>
+
+      <!-- ANÁLISIS SEGUNDO EJERCICIO -->
+      <section class="slide-analysis">
+        <section>
+          <h2 class="fade-in-up">🔍 Análisis de Mejoras</h2>
+          <p class="fragment fade-in-left">
+            En este caso, como no sobra material, es difícil pensar en mejoras directas. 
+            Las opciones serían:
+          </p>
+          <div class="flex-container fade-in-up">
+            <div class="flex-item fragment scale-in">
+              <h4>📈 Aumentar Stock</h4>
+              <p>+ Más oro y plata</p>
+            </div>
+            <div class="flex-item fragment scale-in">
+              <h4>💡 Rediseñar Joyas</h4>
+              <p>Menos recursos por joya</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3 class="fade-in-up">💡 Consideraciones Adicionales</h3>
+          <p class="fragment fade-in-left">
+            <strong>El problema del orfebre es más equilibrado</strong> que el de paquetes escolares. 
+            Ambas restricciones (oro y plata) son limitantes, lo que hace que la solución óptima 
+            sea simétrica: 300 joyas de cada tipo.
+          </p>
+          <p class="fragment fade-in-up">
+            Esto demuestra que <strong>la programación lineal puede manejar diferentes tipos de problemas</strong>, 
+            desde desequilibrios de recursos hasta situaciones perfectamente balanceadas.
+          </p>
+        </section>
+      </section>
+
+      <!-- CONCLUSIONES FINALES -->
+      <section class="slide-conclusions">
+        <h2 class="fade-in-up">🎯 Conclusiones Finales</h2>
+        <div class="grid-container fade-in-up">
+          <div class="grid-item fragment fade-in-left">
+            <h4>✅ Problema 1: Paquetes</h4>
+            <p><strong>150 + 100 = €1.675</strong></p>
+            <small>Bolígrafos limitantes</small>
+          </div>
+          <div class="grid-item fragment fade-in-left">
+            <h4>✅ Problema 2: Joyas</h4>
+            <p><strong>300 + 300 = €27.000</strong></p>
+            <small>Oro y plata equilibrados</small>
+          </div>
+          <div class="grid-item fragment fade-in-left">
+            <h4>💡 Aprendizajes</h4>
+            <p><strong>Diferentes patrones</strong></p>
+            <small>Recursos limitantes vs equilibrados</small>
+          </div>
+          <div class="grid-item fragment fade-in-left">
+            <h4>🛠️ Herramientas</h4>
+            <p><strong>Python + PuLP</strong></p>
+            <small>Combinación poderosa</small>
+          </div>
+        </div>
+        <p class="fragment fade-in-up">
+          <strong>La programación lineal demostró ser una herramienta fundamental para la toma de decisiones empresariales en diferentes contextos.</strong>
+        </p>
+      </section>
+
+      <!-- CIERRE ÉPICO FINAL -->
+      <section class="slide-epic-closing">
+        <h1 class="fade-in-up">🏆 MISIÓN COMPLETAMENTE CUMPLIDA</h1>
+        <h2 class="fragment fade-in-up">Doble Optimización Exitosamente Lograda</h2>
+        <div class="flex-container fade-in-up">
+          <div class="achievement-badge fragment bounce-in">📦</div>
+          <div class="achievement-badge fragment bounce-in">💎</div>
+          <div class="achievement-badge fragment bounce-in">🐍</div>
+          <div class="achievement-badge fragment bounce-in">🚀</div>
         </div>
         <p class="fragment fade-in-up">
           <strong>Dante Passone & Braian Tormey</strong><br>
