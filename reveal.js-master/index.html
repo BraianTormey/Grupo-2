@@ -15,26 +15,36 @@
     .reveal h1 {
       font-size: 3.5vw !important;
       margin-bottom: 2vh !important;
+      color: #ffffff;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
     
     .reveal h2 {
       font-size: 2.8vw !important;
       margin-bottom: 1.5vh !important;
+      color: #ffffff;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
     
     .reveal h3 {
       font-size: 2.2vw !important;
       margin-bottom: 1vh !important;
+      color: #ffffff;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
     
     .reveal h4 {
       font-size: 1.8vw !important;
       margin-bottom: 0.8vh !important;
+      color: #ffffff;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
     
     .reveal p {
       font-size: 1.4vw !important;
       margin-bottom: 0.8vh !important;
+      color: #ffffff;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     }
     
     .reveal ul {
@@ -44,6 +54,8 @@
     
     .reveal li {
       margin-bottom: 0.5vh !important;
+      color: #ffffff;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
     }
     
     .code-highlight {
@@ -104,202 +116,63 @@
       display: inline-block;
     }
     
-    /* Fondos sofisticados y profesionales */
-    .slide-epic {
-      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%) !important;
-      position: relative;
+    /* Python logo container */
+    .python-logo-container {
+      background: rgba(255,255,255,0.9);
+      border-radius: 1vw;
+      padding: 2vh 2vw;
+      margin: 2vh auto;
+      display: inline-block;
     }
     
-    .slide-epic::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-      opacity: 0.3;
+    /* Efectos de brillo */
+    .glow-subtle {
+      text-shadow: 0 0 10px rgba(255,255,255,0.5);
     }
     
-    .slide-intro {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    }
-    
-    .slide-objective {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
-    }
-    
-    .slide-problem {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
-    }
-    
-    .slide-data {
-      background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%) !important;
-    }
-    
-    .slide-restrictions {
-      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%) !important;
-    }
-    
-    .slide-python {
-      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
-    }
-    
-    .slide-results {
-      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%) !important;
-    }
-    
-    .slide-graph {
-      background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%) !important;
-    }
-    
-    .slide-analysis {
-      background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%) !important;
-    }
-    
-    .slide-conclusions {
-      background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%) !important;
-    }
-    
-    .slide-closing {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
-    }
-    
-    /* Animaciones profesionales */
-    .fade-in-up {
+    /* Animaciones para fragmentos */
+    .fragment.fade-in-up {
       opacity: 0;
-      transform: translateY(40px);
-      animation: fadeInUpPro 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
     }
     
-    .fade-in-left {
+    .fragment.fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .fragment.fade-in-left {
       opacity: 0;
-      transform: translateX(-40px);
-      animation: fadeInLeftPro 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      transform: translateX(-30px);
+      transition: all 0.6s ease;
     }
     
-    .fade-in-right {
+    .fragment.fade-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .fragment.bounce-in {
       opacity: 0;
-      transform: translateX(40px);
-      animation: fadeInRightPro 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      transform: scale(0.3);
+      transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
     
-    .scale-in {
+    .fragment.bounce-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    .fragment.scale-in {
       opacity: 0;
       transform: scale(0.8);
-      animation: scaleInPro 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      transition: all 0.5s ease;
     }
     
-    .slide-in-top {
-      opacity: 0;
-      transform: translateY(-60px);
-      animation: slideInTopPro 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    }
-    
-    .bounce-in {
-      opacity: 0;
-      transform: scale(0.3) rotate(-10deg);
-      animation: bounceInPro 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-    }
-    
-    .float {
-      animation: float 3s ease-in-out infinite;
-    }
-    
-    .glow-subtle {
-      animation: glowSubtle 2s ease-in-out infinite alternate;
-    }
-    
-    /* Keyframes profesionales */
-    @keyframes fadeInUpPro {
-      0% {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    @keyframes fadeInLeftPro {
-      0% {
-        opacity: 0;
-        transform: translateX(-40px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    @keyframes fadeInRightPro {
-      0% {
-        opacity: 0;
-        transform: translateX(40px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    @keyframes scaleInPro {
-      0% {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-    
-    @keyframes slideInTopPro {
-      0% {
-        opacity: 0;
-        transform: translateY(-60px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    @keyframes bounceInPro {
-      0% {
-        opacity: 0;
-        transform: scale(0.3) rotate(-10deg);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.05) rotate(2deg);
-      }
-      70% {
-        transform: scale(0.9) rotate(-1deg);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) rotate(0deg);
-      }
-    }
-    
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-    
-    @keyframes glowSubtle {
-      from {
-        box-shadow: 0 0 5px rgba(255,255,255,0.3);
-      }
-      to {
-        box-shadow: 0 0 20px rgba(255,255,255,0.6);
-      }
+    .fragment.scale-in.visible {
+      opacity: 1;
+      transform: scale(1);
     }
     
     /* Ajuste automático de imágenes */
@@ -334,6 +207,10 @@
       text-align: center;
       padding: 1.5vh 1.5vw;
       font-size: 1.3vw !important;
+      background: rgba(255,255,255,0.1);
+      border-radius: 0.8vw;
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
     }
     
     /* Flex responsivo */
@@ -350,6 +227,17 @@
       padding: 1vh 1.2vw;
       font-size: 1.3vw !important;
       min-width: 15vw;
+      background: rgba(255,255,255,0.1);
+      border-radius: 0.8vw;
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+    }
+    
+    /* Achievement badges */
+    .achievement-badge {
+      font-size: 3vw;
+      margin: 0 1vw;
+      filter: drop-shadow(0 0 10px rgba(255,215,0,0.5));
     }
     
     /* Media queries para pantallas muy pequeñas */
@@ -373,6 +261,33 @@
       .reveal img {
         max-width: 80% !important;
       }
+      
+      .flex-container {
+        flex-direction: column;
+        gap: 1vh;
+      }
+      
+      .grid-container {
+        grid-template-columns: 1fr;
+        gap: 1vh;
+      }
+      
+      .stock-number, .solution-number {
+        font-size: 4vw;
+      }
+      
+      .price-highlight {
+        font-size: 3vw;
+      }
+      
+      .tech-item {
+        font-size: 2vw;
+        padding: 1vh 2vw;
+      }
+      
+      .achievement-badge {
+        font-size: 5vw;
+      }
     }
     
     /* Media queries para pantallas muy grandes */
@@ -392,187 +307,6 @@
       .reveal h3 {
         font-size: 1.8vw !important;
       }
-    }
-    
-    /* Override general para fondos claros */
-    .slide-python *, .slide-graph *, .slide-analysis *, .slide-conclusions * {
-      color: #2c3e50 !important;
-    }
-    
-    /* Excepciones para elementos que deben mantener color blanco */
-    .slide-python .tech-item, .slide-graph .tech-item, 
-    .slide-analysis .tech-item, .slide-conclusions .tech-item,
-    .slide-python .flex-item, .slide-graph .flex-item,
-    .slide-analysis .flex-item, .slide-conclusions .flex-item,
-    .slide-python .grid-item, .slide-graph .grid-item,
-    .slide-analysis .grid-item, .slide-conclusions .grid-item {
-      color: #ffffff !important;
-    }
-    
-    /* Override más agresivo para texto en fondos claros */
-    .slide-python h1, .slide-python h2, .slide-python h3, .slide-python h4, .slide-python p, .slide-python li, .slide-python strong,
-    .slide-graph h1, .slide-graph h2, .slide-graph h3, .slide-graph h4, .slide-graph p, .slide-graph li, .slide-graph strong,
-    .slide-analysis h1, .slide-analysis h2, .slide-analysis h3, .slide-analysis h4, .slide-analysis p, .slide-analysis li, .slide-analysis strong {
-      color: #2c3e50 !important;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.9) !important;
-    }
-    
-    /* Override específico para números y precios en fondos claros */
-    .slide-python .stock-number, .slide-python .solution-number, .slide-python .price-highlight,
-    .slide-graph .stock-number, .slide-graph .solution-number, .slide-graph .price-highlight,
-    .slide-analysis .stock-number, .slide-analysis .solution-number, .slide-analysis .price-highlight,
-    .slide-conclusions .stock-number, .slide-conclusions .solution-number, .slide-conclusions .price-highlight {
-      color: #2c3e50 !important;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.9) !important;
-    }
-    
-    /* Eliminar el efecto de "cuadrado" en el texto */
-    .reveal .slides section {
-      background: transparent !important;
-    }
-    
-    /* Mejorar contraste general */
-    .reveal .slides section h1,
-    .reveal .slides section h2,
-    .reveal .slides section h3,
-    .reveal .slides section h4,
-    .reveal .slides section p,
-    .reveal .slides section li {
-      text-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
-    }
-    
-    /* Fondos más oscuros para las secciones problemáticas */
-    .slide-python {
-      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%) !important;
-    }
-    
-    .slide-graph {
-      background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%) !important;
-    }
-    
-    .slide-analysis {
-      background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%) !important;
-    }
-    
-    /* Mejorar las cajas de conclusiones */
-    .slide-conclusions div[style*="background: rgba(255,255,255,0.15)"] {
-      background: rgba(255,255,255,0.25) !important;
-      border: 1px solid rgba(44, 62, 80, 0.3) !important;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
-    }
-    
-    .slide-conclusions div[style*="background: rgba(255,255,255,0.15)"] h4,
-    .slide-conclusions div[style*="background: rgba(255,255,255,0.15)"] p {
-      color: #2c3e50 !important;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.9) !important;
-    }
-    
-    /* Mejorar contraste en tech items */
-    .tech-item {
-      background: rgba(255,255,255,0.15) !important;
-      border: 1px solid rgba(255,255,255,0.3) !important;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
-    }
-    
-    /* Mejorar contraste en flex items */
-    .flex-item {
-      background: rgba(255,255,255,0.1) !important;
-      border: 1px solid rgba(255,255,255,0.2) !important;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
-    }
-    
-    /* Mejorar contraste en grid items */
-    .grid-item {
-      background: rgba(255,255,255,0.1) !important;
-      border: 1px solid rgba(255,255,255,0.2) !important;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
-    }
-    
-    /* Mejorar contraste en code highlights */
-    .code-highlight {
-      background: rgba(255,255,255,0.15) !important;
-      border: 1px solid rgba(255,255,255,0.3) !important;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
-    }
-    
-    /* Mejorar contraste en listas */
-    .reveal .slides section ul li {
-      color: #ffffff !important;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
-    }
-    
-    /* Mejorar contraste en títulos */
-    .reveal .slides section h1,
-    .reveal .slides section h2,
-    .reveal .slides section h3,
-    .reveal .slides section h4 {
-      color: #ffffff !important;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.6) !important;
-    }
-    
-    /* Mejorar contraste en párrafos */
-    .reveal .slides section p {
-      color: #ffffff !important;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
-    }
-    
-    /* Mejorar contraste en elementos small */
-    .reveal .slides section small {
-      color: #e8e8e8 !important;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.5) !important;
-    }
-    
-    /* Mejorar contraste en elementos strong */
-    .reveal .slides section strong {
-      color: #ffffff !important;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.6) !important;
-      font-weight: bold !important;
-    }
-    
-    /* Eliminar cualquier fondo residual que cause el efecto de "cuadrado" */
-    .reveal .slides section * {
-      background: transparent !important;
-    }
-    
-    /* Excepciones para elementos que necesitan fondo */
-    .tech-item,
-    .flex-item,
-    .grid-item,
-    .code-highlight,
-    .price-highlight,
-    .slide-conclusions div[style*="background"] {
-      background: inherit !important;
-    }
-    
-    /* Logo de Python con fondo - FIX */
-    .python-logo-container {
-      background: rgba(255, 255, 255, 0.95) !important;
-      border-radius: 1vw !important;
-      padding: 2vh 2vw !important;
-      display: inline-block !important;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
-      border: 3px solid rgba(255,255,255,1) !important;
-      margin: 2vh auto !important;
-    }
-    
-    /* Mejoras de legibilidad para fondos claros */
-    .slide-python code {
-      background: rgba(44, 62, 80, 0.1) !important;
-      color: #2c3e50 !important;
-      border: 1px solid rgba(44, 62, 80, 0.2) !important;
-    }
-    
-    .slide-graph .flex-container span {
-      background: rgba(44, 62, 80, 0.1) !important;
-      padding: 0.2vh 0.5vw !important;
-      border-radius: 0.3vw !important;
-      border: 1px solid rgba(44, 62, 80, 0.2) !important;
-    }
-    
-    /* Solo las conclusiones mantienen texto blanco */
-    .slide-conclusions h1, .slide-conclusions h2, .slide-conclusions h3, .slide-conclusions h4, .slide-conclusions p, .slide-conclusions li, .slide-conclusions strong {
-      color: #ffffff !important;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important;
     }
   </style>
 </head>
@@ -831,35 +565,35 @@ else:
       <section class="slide-results">
         <section>
           <h2 class="fade-in-up">🎉 Solución Óptima Obtenida</h2>
-          <div class="grid-container fade-in-up" style="animation-delay: 0.3s;">
-            <div class="grid-item bounce-in" style="animation-delay: 0.6s;">
+          <div class="grid-container fade-in-up">
+            <div class="grid-item fragment bounce-in">
               <h4>📦 Paquetes Tipo 1</h4>
               <p class="solution-number float">150</p>
             </div>
-            <div class="grid-item bounce-in" style="animation-delay: 0.8s;">
+            <div class="grid-item fragment bounce-in">
               <h4>📦 Paquetes Tipo 2</h4>
               <p class="solution-number float">100</p>
             </div>
-            <div class="grid-item bounce-in" style="animation-delay: 1.0s;">
+            <div class="grid-item fragment bounce-in">
               <h4>💰 Ganancia Total</h4>
               <p class="solution-number float glow-subtle">€1.675</p>
             </div>
           </div>
-          <p class="fade-in-up" style="animation-delay: 1.3s;">🎯 Esta es la combinación que maximiza los beneficios!</p>
+          <p class="fragment fade-in-up">🎯 Esta es la combinación que maximiza los beneficios!</p>
         </section>
 
         <section class="slide-graph">
           <h3 class="fade-in-up">📈 Visualización Gráfica</h3>
-          <p class="fade-in-left" style="animation-delay: 0.3s;">
+          <p class="fragment fade-in-left">
             Este gráfico muestra las restricciones, la región factible, la solución óptima 
             y el punto donde se alcanza la ganancia máxima.
           </p>
-          <div class="flex-container fade-in-up" style="animation-delay: 0.6s;">
+          <div class="flex-container fragment fade-in-up">
             <span style="color: #ffd700;"><strong>📓 Cuadernos</strong></span>
             <span style="color: #ff6b6b;"><strong>📁 Carpetas</strong></span>
             <span style="color: #38ef7d;"><strong>✏️ Bolígrafos</strong></span>
           </div>
-          <img src="grafico_paquetes.png" alt="Gráfico del problema de paquetes" class="scale-in" style="max-width: 80%; margin: 2vh auto; animation-delay: 0.9s;">
+          <img src="grafico_paquetes.png" alt="Gráfico del problema de paquetes" class="fragment scale-in" style="max-width: 80%; margin: 2vh auto;">
         </section>
       </section>
 
@@ -867,15 +601,15 @@ else:
       <section class="slide-analysis">
         <section>
           <h2 class="fade-in-up">🔍 Análisis de Mejoras</h2>
-          <p class="fade-in-left" style="animation-delay: 0.3s;">
+          <p class="fragment fade-in-left">
             Analizaremos diferentes escenarios para optimizar aún más el negocio:
           </p>
-          <div class="flex-container fade-in-up" style="animation-delay: 0.6s;">
-            <div class="flex-item scale-in" style="animation-delay: 0.9s;">
+          <div class="flex-container fade-in-up">
+            <div class="flex-item fragment scale-in">
               <h4>📈 Aumentar Stock</h4>
               <p>+50 bolígrafos</p>
             </div>
-            <div class="flex-item scale-in" style="animation-delay: 1.1s;">
+            <div class="flex-item fragment scale-in">
               <h4>💰 Reducir Costos</h4>
               <p>-250 carpetas</p>
             </div>
@@ -884,80 +618,82 @@ else:
 
         <section>
           <h3 class="fade-in-up">📈 Escenario 1: Aumentar Stock de Bolígrafos</h3>
-          <p class="fade-in-left" style="animation-delay: 0.3s;">
+          <p class="fragment fade-in-left">
             Una mejora podría ser <strong>aumentar el stock de bolígrafos</strong> (+50), 
             siendo que este es el recurso más limitado. Aumentarlo permitiría crear más 
             <strong>paquetes del tipo 1</strong>, que son los que más ganancia dan.
           </p>
-          <img src="captura_excel_stock.png" alt="Captura de Excel con nuevo stock" class="scale-in" style="max-width: 80%; margin: 2vh auto; animation-delay: 0.6s;">
+          <img src="captura_excel_stock.png" alt="Captura de Excel con nuevo stock" class="fragment scale-in" style="max-width: 80%; margin: 2vh auto;">
         </section>
 
         <section>
           <h3 class="fade-in-up">📊 Gráfico Actualizado - Más Bolígrafos</h3>
-          <img src="solucion_450.png" alt="Gráfico con bolígrafos aumentados" class="scale-in" style="max-width: 80%; margin: 2vh auto; animation-delay: 0.3s;">
+          <img src="solucion_450.png" alt="Gráfico con bolígrafos aumentados" class="fragment scale-in" style="max-width: 80%; margin: 2vh auto;">
         </section>
 
         <section>
           <h3 class="fade-in-up">💰 Escenario 2: Reducir Stock de Carpetas</h3>
-          <p class="fade-in-left" style="animation-delay: 0.3s;">
+          <p class="fragment fade-in-left">
             En ambos casos se observa <strong>un gran sobrante de carpetas</strong>. 
             Reducir su cantidad no generaría más ganancias, pero sí permitiría 
             <strong>ahorrar costos</strong>, tanto en la compra como en el almacenamiento.
           </p>
-          <img src="captura_excel_carpetas.png" alt="Captura de Excel con menos carpetas" class="scale-in" style="max-width: 80%; margin: 2vh auto; animation-delay: 0.6s;">
+          <img src="captura_excel_carpetas.png" alt="Captura de Excel con menos carpetas" class="fragment scale-in" style="max-width: 80%; margin: 2vh auto;">
         </section>
 
         <section>
           <h3 class="fade-in-up">📊 Gráfico Actualizado - Menos Carpetas</h3>
-          <img src="solucion_250.png" alt="Gráfico con menos carpetas (250)" class="scale-in" style="max-width: 80%; margin: 2vh auto; animation-delay: 0.3s;">
+          <img src="solucion_250.png" alt="Gráfico con menos carpetas (250)" class="fragment scale-in" style="max-width: 80%; margin: 2vh auto;">
         </section>
       </section>
 
       <!-- CONCLUSIONES -->
       <section class="slide-conclusions">
         <h2 class="fade-in-up">🎯 Conclusiones y Aprendizajes</h2>
-        <div class="fade-in-up" style="animation-delay: 0.3s;">
-          <div style="background: rgba(255,255,255,0.15); border-radius: 0.4vw; padding: 0.5vh 0.5vw; margin: 0.3vh 0; border-left: 0.2vw solid #38ef7d; backdrop-filter: blur(10px);" class="fade-in-left" style="animation-delay: 0.6s;">
-            <h4>📊 <strong>Solución Óptima</strong></h4>
-            <p>150 paquetes tipo 1 + 100 paquetes tipo 2 = <strong>€1.675</strong></p>
+        <div class="grid-container fade-in-up">
+          <div class="grid-item fragment fade-in-left">
+            <h4>✅ Solución Óptima</h4>
+            <p><strong>150 + 100 = €1.675</strong></p>
+            <small>Máxima ganancia alcanzada</small>
           </div>
-          <div style="background: rgba(255,255,255,0.15); border-radius: 0.4vw; padding: 0.5vh 0.5vw; margin: 0.3vh 0; border-left: 0.2vw solid #ffd700; backdrop-filter: blur(10px);" class="fade-in-left" style="animation-delay: 0.8s;">
-            <h4>🔍 <strong>Análisis de Recursos</strong></h4>
-            <p>Los bolígrafos son el recurso más limitante, las carpetas tienen exceso</p>
+          <div class="grid-item fragment fade-in-left">
+            <h4>🔍 Análisis de Recursos</h4>
+            <p><strong>Bolígrafos limitantes</strong></p>
+            <small>Recurso más escaso</small>
           </div>
-          <div style="background: rgba(255,255,255,0.15); border-radius: 0.4vw; padding: 0.5vh 0.5vw; margin: 0.3vh 0; border-left: 0.2vw solid #ff6b6b; backdrop-filter: blur(10px);" class="fade-in-left" style="animation-delay: 1.0s;">
-            <h4>💡 <strong>Mejoras Identificadas</strong></h4>
-            <p>Aumentar bolígrafos (+50) o reducir carpetas (-250) optimizaría costos</p>
+          <div class="grid-item fragment fade-in-left">
+            <h4>💡 Mejoras Identificadas</h4>
+            <p><strong>+50 bolígrafos</strong> o <strong>-250 carpetas</strong></p>
+            <small>Optimizaciones posibles</small>
           </div>
-          <div style="background: rgba(255,255,255,0.15); border-radius: 0.4vw; padding: 0.5vh 0.5vw; margin: 0.3vh 0; border-left: 0.2vw solid #38ef7d; backdrop-filter: blur(10px);" class="fade-in-left" style="animation-delay: 1.2s;">
-            <h4>🐍 <strong>Herramientas Utilizadas</strong></h4>
-            <p>Python + PuLP demostraron ser herramientas poderosas para optimización</p>
+          <div class="grid-item fragment fade-in-left">
+            <h4>🛠️ Herramientas Utilizadas</h4>
+            <p><strong>Python + PuLP</strong></p>
+            <small>Combinación poderosa</small>
           </div>
         </div>
+        <p class="fragment fade-in-up">
+          <strong>La programación lineal demostró ser una herramienta fundamental para la toma de decisiones empresariales.</strong>
+        </p>
       </section>
 
       <!-- CIERRE ÉPICO -->
-      <section class="slide-closing">
+      <section class="slide-epic-closing">
         <h1 class="fade-in-up">🏆 MISIÓN CUMPLIDA</h1>
-        <h2 class="fade-in-up" style="animation-delay: 0.3s;">Optimización Exitosamente Lograda</h2>
-        
-        <div class="fade-in-up" style="animation-delay: 0.6s;">
-          <div style="display: inline-block; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #000; padding: 0.3vh 0.8vw; border-radius: 1vw; margin: 0.2vh; font-weight: bold; font-size: 0.7vw; box-shadow: 0 4px 15px rgba(255,215,0,0.3);" class="bounce-in" style="animation-delay: 0.9s;">🎯 Solución Óptima</div>
-          <div style="display: inline-block; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #000; padding: 0.3vh 0.8vw; border-radius: 1vw; margin: 0.2vh; font-weight: bold; font-size: 0.7vw; box-shadow: 0 4px 15px rgba(255,215,0,0.3);" class="bounce-in" style="animation-delay: 1.1s;">💰 €1.675 Máxima</div>
-          <div style="display: inline-block; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #000; padding: 0.3vh 0.8vw; border-radius: 1vw; margin: 0.2vh; font-weight: bold; font-size: 0.7vw; box-shadow: 0 4px 15px rgba(255,215,0,0.3);" class="bounce-in" style="animation-delay: 1.3s;">📦 250 Paquetes</div>
-          <div style="display: inline-block; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #000; padding: 0.3vh 0.8vw; border-radius: 1vw; margin: 0.2vh; font-weight: bold; font-size: 0.7vw; box-shadow: 0 4px 15px rgba(255,215,0,0.3);" class="bounce-in" style="animation-delay: 1.5s;">🚀 Python + PuLP</div>
+        <h2 class="fragment fade-in-up">Optimización Exitosamente Lograda</h2>
+        <div class="flex-container fade-in-up">
+          <div class="achievement-badge fragment bounce-in">🎯</div>
+          <div class="achievement-badge fragment bounce-in">📊</div>
+          <div class="achievement-badge fragment bounce-in">🐍</div>
+          <div class="achievement-badge fragment bounce-in">💡</div>
         </div>
-        
-        <div class="fade-in-up" style="animation-delay: 1.8s;">
-          <p><strong>¿Preguntas sobre nuestro trabajo?</strong></p>
-          <p><strong>Dante Passone & Braian Tormey</strong><br>
-          <span style="color: #ffd700;">Grupo 2 - Programación Lineal</span></p>
-        </div>
-        
-        <div class="fade-in-up" style="animation-delay: 2.1s;">
-          <p class="glow-subtle"><strong>🚀 Transformando Datos en Decisiones Inteligentes</strong></p>
-          <p><strong>🎯 Optimización • 🐍 Python • 📊 Análisis • 💡 Innovación</strong></p>
-        </div>
+        <p class="fragment fade-in-up">
+          <strong>Dante Passone & Braian Tormey</strong><br>
+          Grupo 2 - Análisis de Optimización
+        </p>
+        <p class="fragment fade-in-up">
+          <strong>¡Transformando datos en decisiones inteligentes!</strong>
+        </p>
       </section>
 
     </div>
