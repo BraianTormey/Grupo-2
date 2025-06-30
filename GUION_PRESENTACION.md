@@ -1,255 +1,165 @@
-# 🎯 GUION PRESENTACIÓN - OPTIMIZACIÓN DE PAQUETES ESCOLARES Y JOYAS
+# GUION PRESENTACIÓN - OPTIMIZACIÓN CON PROGRAMACIÓN LINEAL
 ## Grupo 2: Dante Passone & Braian Tormey
 
 ---
 
-## 📋 **ESTRUCTURA DE LA PRESENTACIÓN**
+## APERTURA (2 minutos)
 
-### **DURACIÓN TOTAL:** 25-30 minutos
-### **OBJETIVO:** Demostrar dominio de programación lineal con Python y PuLP en dos contextos diferentes
+**"Buenos días. Somos Dante Passone y Braian Tormey del Grupo 2, y hoy vamos a demostrar cómo la programación lineal puede transformar problemas empresariales complejos en soluciones óptimas mediante el uso de Python y PuLP."**
 
----
+**"La programación lineal es una técnica matemática fundamental en investigación operativa que nos permite encontrar la mejor manera de asignar recursos limitados para maximizar o minimizar una función objetivo, siempre respetando un conjunto de restricciones lineales."**
 
-## 🚀 **SLIDE 1: APERTURA ÉPICA** (2 minutos)
-
-### **Elementos que aparecen progresivamente:**
-1. **Título principal:** "🚀 OPTIMIZACIÓN MÁXIMA"
-2. **Subtítulo:** "El Poder de la Programación Lineal"
-3. **Descripción:** "Transformando Datos en Decisiones Inteligentes"
-4. **Tech Stack:** Python, PuLP, Optimización, Análisis
-5. **Cierre:** "Preparados para revolucionar la toma de decisiones empresariales"
-
-### **Guión:**
-*"Buenos días, hoy vamos a demostrar cómo la programación lineal puede transformar datos en decisiones inteligentes. Utilizaremos Python y PuLP para resolver dos problemas reales de optimización empresarial."*
+**"En esta presentación, resolveremos dos problemas completamente diferentes: uno de logística educativa y otro de manufactura artesanal, demostrando la versatilidad y poder de esta metodología."**
 
 ---
 
-## 📦 **SLIDE 2: INTRODUCCIÓN** (1 minuto)
+## PROBLEMA 1: PAQUETES ESCOLARES (12 minutos)
 
-### **Elementos progresivos:**
-1. **Título:** "Optimización de Paquetes Escolares"
-2. **Subtítulo:** "Programación Lineal con Python"
-3. **Autores:** Dante Passone & Braian Tormey
-4. **Grupo:** "Grupo 2 - Análisis de Optimización"
+### Enunciado (2 minutos)
 
-### **Guión:**
-*"Somos Dante Passone y Braian Tormey del Grupo 2, y hoy resolveremos dos problemas de optimización: paquetes escolares y joyas artesanales, usando programación lineal con Python."*
+**"Nuestro primer caso de estudio aborda un problema real de logística educativa. Unos almacenes quieren optimizar su oferta de material escolar para el inicio del curso académico."**
 
----
+**"Disponen de un stock limitado: 600 cuadernos, 500 carpetas y 400 bolígrafos. El desafío es decidir cuántos paquetes de cada tipo fabricar para maximizar los ingresos, considerando que cada paquete tiene una composición específica y un precio de venta determinado."**
 
-## 🎯 **SLIDE 3: OBJETIVOS** (1 minuto)
+**"Este tipo de problema es típico en la gestión de inventarios y planificación de producción, donde debemos equilibrar la demanda del mercado con las limitaciones de recursos disponibles."**
 
-### **Elementos progresivos:**
-1. **Título:** "Objetivo del Trabajo"
-2. **Lista de objetivos** (aparecen uno por uno)
+### Modelo Matemático (3 minutos)
 
-### **Guión:**
-*"Nuestros objetivos son: modelar dos problemas reales, implementar las soluciones con Python y PuLP, visualizar las regiones factibles, analizar mejoras, y demostrar el poder de la programación lineal en diferentes contextos."*
+**"Para modelar este problema, definimos dos variables de decisión: x representa la cantidad de paquetes tipo 1, e y la cantidad de paquetes tipo 2. Estas son nuestras variables de control."**
 
----
+**"La función objetivo que queremos maximizar es 6.5x + 7y, que representa el ingreso total. Cada coeficiente corresponde al precio de venta de cada tipo de paquete."**
 
-## 📋 **SLIDE 4: ENUNCIADO PRIMER PROBLEMA** (2 minutos)
+**"Las restricciones surgen de las limitaciones físicas del stock. Para los cuadernos: 2x + 3y ≤ 600. Esta restricción asegura que no excedamos la disponibilidad de cuadernos, considerando que cada paquete tipo 1 usa 2 cuadernos y cada paquete tipo 2 usa 3."**
 
-### **Elementos progresivos:**
-1. **Título:** "Enunciado del Problema"
-2. **Descripción del contexto**
-3. **Paquete Tipo 1** (con precio)
-4. **Paquete Tipo 2** (con precio)
-5. **Pregunta clave**
+**"Similarmente, para las carpetas: x + y ≤ 500, ya que ambos tipos de paquetes usan exactamente una carpeta. Para los bolígrafos: 2x + y ≤ 400, donde el tipo 1 usa 2 bolígrafos y el tipo 2 usa solo 1."**
 
-### **Guión:**
-*"El primer problema es el siguiente: Unos almacenes quieren ofrecer 600 cuadernos, 500 carpetas y 400 bolígrafos. Pueden crear dos tipos de paquetes: el Tipo 1 cuesta 6,50€ y contiene 2 cuadernos, 1 carpeta y 2 bolígrafos. El Tipo 2 cuesta 7,00€ y contiene 3 cuadernos, 1 carpeta y 1 bolígrafo. La pregunta es: ¿Cuántos paquetes de cada tipo deben hacer para maximizar los beneficios?"*
+**"Finalmente, las restricciones de no negatividad x ≥ 0, y ≥ 0 son fundamentales porque no podemos fabricar cantidades negativas de paquetes."**
 
----
+### Implementación en Python (4 minutos)
 
-## 📊 **SLIDE 5: DATOS PRIMER PROBLEMA** (1.5 minutos)
+**"Ahora implementaremos este modelo usando Python y PuLP. PuLP es una biblioteca especializada en programación lineal que implementa algoritmos eficientes como el método simplex para encontrar soluciones óptimas."**
 
-### **Elementos progresivos:**
-1. **Título:** "Datos Identificados"
-2. **Subtítulo:** "Stock Disponible"
-3. **Cuadernos:** 600
-4. **Carpetas:** 500
-5. **Bolígrafos:** 400
-6. **Objetivo**
+**"Primero, creamos un objeto LpProblem con el nombre 'Paquetes_Escolares' y especificamos que queremos maximizar la función objetivo. Esto inicializa el solver interno de PuLP."**
 
-### **Guión:**
-*"Identificamos los datos clave: tenemos 600 cuadernos, 500 carpetas y 400 bolígrafos disponibles. Nuestro objetivo es maximizar la ganancia respetando estas limitaciones de stock."*
+**"Definimos nuestras variables de decisión usando LpVariable. El parámetro lowBound=0 establece el límite inferior, cat='Integer' especifica que queremos soluciones enteras, lo cual es crucial en este contexto porque no podemos fabricar fracciones de paquetes."**
+
+**"La función objetivo se define simplemente sumando los términos 6.5*x + 7*y. PuLP automáticamente reconoce esto como la función a maximizar."**
+
+**"Las restricciones se agregan una por una usando el operador +=. Cada restricción tiene un nombre descriptivo que nos ayuda a identificar cuál es la limitación activa en la solución final."**
+
+**"El método solve() ejecuta el algoritmo de optimización. PuLP internamente convierte nuestro problema a forma estándar y aplica el método simplex, que es matemáticamente garantizado para encontrar la solución óptima global si existe."**
+
+### Resultados y Análisis (3 minutos)
+
+**"La solución óptima encontrada es: 150 paquetes tipo 1 y 100 paquetes tipo 2, generando un ingreso total de 1.675 euros."**
+
+**"Este resultado es matemáticamente óptimo, lo que significa que no existe ninguna otra combinación factible que genere mayor ingreso respetando todas las restricciones."**
+
+**"El gráfico muestra la región factible como un polígono convexo. La solución óptima se encuentra en un vértice de este polígono, lo cual es una propiedad fundamental de la programación lineal: las soluciones óptimas siempre ocurren en los vértices de la región factible."**
+
+**"Observamos que la restricción de bolígrafos es activa en la solución óptima, lo que significa que este recurso es el factor limitante. Las carpetas tienen un exceso significativo, indicando una oportunidad de optimización del inventario."**
 
 ---
 
-## 🔒 **SLIDE 6: RESTRICCIONES PRIMER PROBLEMA** (2 minutos)
+## ANÁLISIS DE MEJORAS - PAQUETES ESCOLARES (3 minutos)
 
-### **Elementos progresivos:**
-1. **Título:** "Límites y Restricciones"
-2. **Restricción de cuadernos:** 2x + 3y ≤ 600
-3. **Restricción de carpetas:** x + y ≤ 500
-4. **Restricción de bolígrafos:** 2x + y ≤ 400
-5. **No negatividad:** x ≥ 0, y ≥ 0
+**"El análisis de sensibilidad nos permite evaluar el impacto de cambios en los parámetros del problema. Consideramos dos escenarios de mejora."**
 
-### **Guión:**
-*"Ahora formulamos las restricciones matemáticas. Para los cuadernos: 2x + 3y ≤ 600, donde x son paquetes tipo 1 e y son paquetes tipo 2. Para las carpetas: x + y ≤ 500. Para los bolígrafos: 2x + y ≤ 400. Y finalmente, x ≥ 0, y ≥ 0 porque no podemos fabricar cantidades negativas."*
+**"En el primer escenario, aumentamos el stock de bolígrafos de 400 a 450 unidades. Este cambio permite fabricar más paquetes tipo 1, que son más rentables por unidad. El resultado muestra un incremento en la ganancia total."**
+
+**"En el segundo escenario, reducimos el stock de carpetas de 500 a 250 unidades. Este análisis revela que las carpetas tienen un exceso significativo, por lo que esta reducción no afecta la ganancia pero sí reduce costos de almacenamiento y capital inmovilizado."**
+
+**"Estos análisis demuestran el valor de la programación lineal no solo para encontrar soluciones óptimas, sino también para evaluar la robustez de estas soluciones ante cambios en las condiciones del problema."**
 
 ---
 
-## 🐍 **SLIDE 7-15: PYTHON PRIMER PROBLEMA** (8 minutos)
+## PROBLEMA 2: JOYAS ARTESANALES (12 minutos)
 
-### **Guión detallado por sección:**
+### Enunciado (2 minutos)
 
-**SLIDE 7: Introducción Python**
-*"Utilizaremos Python y la librería PuLP para resolver este problema. PuLP es una biblioteca especializada en programación lineal que nos permitirá modelar y resolver el problema de forma eficiente."*
+**"Nuestro segundo caso de estudio aborda un problema de manufactura artesanal completamente diferente. Un orfebre debe optimizar la producción de joyas considerando limitaciones de metales preciosos."**
 
-**SLIDE 8: Preparar entorno**
-*"Primero instalamos PuLP usando pip. Esta es la biblioteca que necesitamos para programación lineal. Luego importamos PuLP con el asterisco para tener acceso a todas sus funciones, y también matplotlib y numpy para visualización y cálculos."*
+**"Este problema es representativo de industrias donde los recursos son costosos y escasos, y donde la optimización puede tener un impacto significativo en la rentabilidad del negocio."**
 
-**SLIDE 9: Definir modelo**
-*"Creamos un objeto LpProblem llamado 'Paquetes_Escolares'. LpMaximize indica que queremos maximizar la función objetivo. Definimos x como la cantidad de paquetes tipo 1, e y como la cantidad de paquetes tipo 2. El 0 indica el límite inferior, None significa sin límite superior, y LpInteger especifica que queremos números enteros. La función objetivo es 6.50x + 7.00y, que representa la ganancia total."*
+**"El orfebre dispone de 750 gramos de oro y 750 gramos de plata, y puede fabricar dos tipos de joyas con diferentes composiciones y precios de venta."**
 
-**SLIDE 10: Restricciones**
-*"Agregamos las restricciones una por una. La primera restringe el uso de cuadernos: 2x + 3y ≤ 600. La segunda restringe las carpetas: x + y ≤ 500. La tercera restringe los bolígrafos: 2x + y ≤ 400."*
+### Modelo Matemático (3 minutos)
 
-**SLIDE 11: Resolver**
-*"El método solve() ejecuta el algoritmo de programación lineal y encuentra la solución óptima."*
+**"El modelo matemático para este problema es más simétrico que el anterior. Definimos x como la cantidad de joyas tipo A e y como la cantidad de joyas tipo B."**
 
-**SLIDE 12: Resultados**
-*"Extraemos los valores de las variables óptimas. value(x) nos da la cantidad óptima de paquetes tipo 1, value(y) la cantidad de paquetes tipo 2, y value(prob.objective) la ganancia máxima."*
+**"La función objetivo 40x + 50y representa el beneficio total, donde cada coeficiente corresponde al precio de venta de cada tipo de joya."**
 
----
+**"Las restricciones reflejan el consumo de metales preciosos. Para el oro: x + 1.5y ≤ 750, donde la joya tipo A consume 1 gramo y la tipo B consume 1.5 gramos."**
 
-## 📊 **SLIDE 16-17: RESULTADOS PRIMER PROBLEMA** (2 minutos)
+**"Para la plata: 1.5x + y ≤ 750, donde la joya tipo A consume 1.5 gramos y la tipo B consume 1 gramo. Esta simetría en las restricciones es matemáticamente interesante y nos llevará a una solución equilibrada."**
 
-### **Guión:**
-*"La solución óptima es: 150 paquetes tipo 1, 100 paquetes tipo 2, generando una ganancia total de 1.675 euros. Este gráfico muestra las restricciones como líneas, la región factible como área sombreada, y el punto óptimo donde se alcanza la ganancia máxima."*
+**"Las restricciones de no negatividad x ≥ 0, y ≥ 0 son igualmente importantes en este contexto."**
 
----
+### Implementación en Python (4 minutos)
 
-## 🔍 **SLIDE 18-22: ANÁLISIS PRIMER PROBLEMA** (4 minutos)
+**"La implementación en Python sigue la misma metodología, pero ahora trabajamos con un problema donde ambas restricciones son igualmente importantes."**
 
-### **Guión:**
-*"Analizamos dos escenarios de mejora: aumentar el stock de bolígrafos en 50 unidades, y reducir el stock de carpetas en 250 unidades para ahorrar costos. En el primer escenario, aumentamos los bolígrafos de 400 a 450. Esto permite crear más paquetes tipo 1, que son más rentables. En el segundo escenario, reducimos las carpetas de 500 a 250. Observamos que hay un gran exceso de carpetas, por lo que esta reducción no afecta la ganancia pero sí reduce costos de almacenamiento."*
+**"Creamos un nuevo objeto LpProblem llamado 'Problema_Joyas' y definimos nuestras variables de decisión con las mismas especificaciones de enteros y no negatividad."**
 
----
+**"La función objetivo 40*x + 50*y se define de manera similar. Las restricciones se implementan usando las ecuaciones matemáticas que derivamos del análisis del problema."**
 
-## 🎯 **SLIDE 23: CONCLUSIONES PRIMER PROBLEMA** (2 minutos)
+**"El método solve() ejecuta el algoritmo de optimización. En este caso, el problema es más equilibrado, lo que se reflejará en la solución final."**
 
-### **Guión:**
-*"Nuestras conclusiones del primer problema son: la solución óptima genera 1.675 euros, los bolígrafos son el recurso más limitante, las carpetas tienen exceso, y Python con PuLP demostraron ser herramientas poderosas para optimización."*
+### Resultados y Análisis (3 minutos)
 
----
+**"La solución óptima es: 300 joyas tipo A y 300 joyas tipo B, generando un beneficio total de 27.000 euros."**
 
-## 💎 **SLIDE 24: APERTURA SEGUNDO PROBLEMA** (1 minuto)
+**"Esta solución es matemáticamente elegante porque ambas restricciones son activas simultáneamente. Esto significa que tanto el oro como la plata se consumen completamente, sin excesos."**
 
-### **Guión:**
-*"Ahora vamos a resolver un segundo problema completamente diferente: la optimización de joyas artesanales. Este problema nos mostrará cómo la programación lineal puede aplicarse en contextos muy distintos."*
+**"El gráfico muestra que la solución óptima se encuentra en la intersección de las dos restricciones principales. Esta propiedad matemática es fundamental: cuando dos restricciones son activas, la solución se encuentra en su punto de intersección."**
+
+**"La simetría de la solución (300 de cada tipo) refleja la simetría en las restricciones del problema. Este es un ejemplo clásico de cómo la estructura matemática del problema se refleja en la estructura de la solución."**
 
 ---
 
-## 💎 **SLIDE 25: ENUNCIADO SEGUNDO PROBLEMA** (2 minutos)
+## ANÁLISIS DE MEJORAS - JOYAS (3 minutos)
 
-### **Guión:**
-*"El segundo problema es el siguiente: Un orfebre fabrica dos tipos de joyas. Las del tipo A precisan 1 gr de oro y 1,5 gr de plata, vendiéndose a 40 euros cada una. Para la fabricación de las de tipo B emplea 1,5 gr de oro y 1 gr de plata, y las vende a 50 euros. El orfebre tiene solo en el taller 750 gr de cada uno de los metales. La pregunta es: ¿Cuántas joyas ha de fabricar de cada clase para obtener un beneficio máximo?"*
+**"El análisis de mejoras para este problema es diferente al anterior. Como no hay excesos de recursos, las mejoras deben venir de aumentar la disponibilidad de materiales."**
 
----
+**"Consideramos el escenario de aumentar el stock a 900 gramos de oro y 900 gramos de plata. Este cambio permite fabricar 360 joyas de cada tipo, aumentando el beneficio total a 32.400 euros."**
 
-## 📊 **SLIDE 26-27: DATOS SEGUNDO PROBLEMA** (1.5 minutos)
+**"Este análisis demuestra el concepto de rendimientos marginales decrecientes: el incremento en el beneficio no es proporcional al incremento en los recursos, debido a las restricciones lineales del problema."**
 
-### **Guión:**
-*"Identificamos los datos clave: tenemos 750 gramos de oro y 750 gramos de plata disponibles. Nuestro objetivo es maximizar el beneficio respetando estas limitaciones de stock. Ahora formulamos las restricciones matemáticas. Para el oro: x + 1.5y ≤ 750, donde x son joyas tipo A e y son joyas tipo B. Para la plata: 1.5x + y ≤ 750. Y finalmente, x ≥ 0, y ≥ 0 porque no podemos fabricar cantidades negativas."*
+**"La visualización muestra cómo la región factible se expande, pero mantiene su forma geométrica fundamental, lo cual es una propiedad importante de la programación lineal."**
 
 ---
 
-## 🐍 **SLIDE 28-36: PYTHON SEGUNDO PROBLEMA** (8 minutos)
+## CONCLUSIONES Y REFLEXIONES FINALES (3 minutos)
 
-### **Guión detallado por sección:**
+**"Hemos demostrado exitosamente cómo la programación lineal puede aplicarse a problemas empresariales muy diferentes, desde logística educativa hasta manufactura artesanal."**
 
-**SLIDE 28: Introducción Python**
-*"Utilizaremos Python y la librería PuLP para modelar y resolver este problema de optimización de joyas mediante programación lineal."*
+**"Los dos problemas ilustran conceptos fundamentales: el primero muestra un problema con recursos desequilibrados donde una restricción es claramente limitante, mientras que el segundo muestra un problema equilibrado donde múltiples restricciones son activas simultáneamente."**
 
-**SLIDE 29: Preparar entorno**
-*"Primero instalamos PuLP usando pip. Luego importamos la librería PuLP para tener acceso a todas sus funciones."*
+**"Python con PuLP demostraron ser herramientas excepcionalmente poderosas para implementar estos modelos. La combinación de simplicidad de uso y robustez matemática hace de esta tecnología una opción ideal para optimización empresarial."**
 
-**SLIDE 30: Definir modelo**
-*"Creamos un objeto LpProblem llamado 'Problema_Joyas'. LpMaximize indica que queremos maximizar la función objetivo. Definimos x como la cantidad de joyas tipo A, e y como la cantidad de joyas tipo B. El lowBound=0 indica el límite inferior, cat='Integer' especifica que queremos números enteros. La función objetivo es 40x + 50y, que representa el beneficio total."*
+**"Los análisis de sensibilidad que realizamos son cruciales en la práctica empresarial, ya que permiten evaluar la robustez de las soluciones y identificar oportunidades de mejora."**
 
-**SLIDE 31: Restricciones**
-*"Agregamos las restricciones una por una. La primera restringe el uso de oro: x + 1.5y ≤ 750. La segunda restringe la plata: 1.5x + y ≤ 750."*
-
-**SLIDE 32: Resolver**
-*"El método solve() ejecuta el algoritmo de programación lineal y encuentra la solución óptima."*
-
-**SLIDE 33: Resultados**
-*"Verificamos si el problema se resolvió correctamente. 'Optimal' significa que se encontró la solución óptima. Extraemos los valores de las variables óptimas y mostramos los resultados."*
+**"La programación lineal sigue siendo una de las herramientas más importantes en investigación operativa, con aplicaciones en logística, finanzas, manufactura, y muchos otros campos."**
 
 ---
 
-## 📊 **SLIDE 37-38: RESULTADOS SEGUNDO PROBLEMA** (2 minutos)
+## CIERRE (1 minuto)
 
-### **Guión:**
-*"La solución óptima es: 300 joyas tipo A, 300 joyas tipo B, generando un beneficio total de 27.000 euros. Este gráfico muestra las restricciones de oro y plata, la región factible, la solución óptima y el punto donde se alcanza el beneficio máximo."*
+**"En conclusión, hemos demostrado que la programación lineal, implementada con Python y PuLP, puede transformar problemas empresariales complejos en soluciones óptimas y cuantificables."**
 
----
+**"La metodología que hemos presentado es aplicable a una amplia gama de problemas reales, y las herramientas que hemos utilizado están disponibles gratuitamente, democratizando el acceso a técnicas avanzadas de optimización."**
 
-## 🔍 **SLIDE 39-40: ANÁLISIS SEGUNDO PROBLEMA** (2 minutos)
-
-### **Guión:**
-*"En este caso, como no sobra material, es difícil pensar en mejoras directas. Las opciones serían aumentar el stock de oro y plata, o rediseñar las joyas para que usen menos recursos. El problema del orfebre es más equilibrado que el de paquetes escolares. Ambas restricciones (oro y plata) son limitantes, lo que hace que la solución óptima sea simétrica: 300 joyas de cada tipo. Esto demuestra que la programación lineal puede manejar diferentes tipos de problemas, desde desequilibrios de recursos hasta situaciones perfectamente balanceadas."*
+**"Gracias por su atención. ¿Hay alguna pregunta sobre nuestro trabajo o sobre las aplicaciones de la programación lineal en otros contextos?"**
 
 ---
 
-## 🎯 **SLIDE 41: CONCLUSIONES FINALES** (2 minutos)
+## PUNTOS CLAVE PARA DESTACAR
 
-### **Guión:**
-*"Nuestras conclusiones finales son: el primer problema generó 1.675 euros con bolígrafos como recurso limitante, el segundo problema generó 27.000 euros con oro y plata equilibrados. Esto nos muestra diferentes patrones: recursos limitantes versus recursos equilibrados. Python con PuLP demostraron ser herramientas poderosas para optimización en diferentes contextos. La programación lineal demostró ser una herramienta fundamental para la toma de decisiones empresariales en diferentes contextos."*
+1. **Dominio técnico:** Conocimiento profundo de algoritmos de optimización
+2. **Análisis crítico:** Identificación de restricciones activas y oportunidades de mejora
+3. **Aplicabilidad práctica:** Conexión clara entre teoría matemática y problemas reales
+4. **Metodología sistemática:** Enfoque estructurado desde modelado hasta implementación
+5. **Pensamiento analítico:** Capacidad de interpretar resultados y extraer insights
+6. **Comunicación técnica:** Explicación clara de conceptos complejos
 
----
-
-## 🏆 **SLIDE 42: CIERRE ÉPICO FINAL** (1 minuto)
-
-### **Guión:**
-*"Hemos completado exitosamente la optimización de dos problemas completamente diferentes, demostrando el poder de la programación lineal con Python. ¿Hay alguna pregunta sobre nuestro trabajo? Gracias por su atención."*
-
----
-
-## 💡 **CONSEJOS PARA LA PRESENTACIÓN**
-
-### **Antes de empezar:**
-- ✅ Verificar que la presentación funcione correctamente
-- ✅ Tener ambos códigos Python listos para ejecutar
-- ✅ Preparar respuestas para preguntas técnicas
-
-### **Durante la presentación:**
-- ✅ Mantener contacto visual con la audiencia
-- ✅ Usar las transiciones para enfatizar puntos clave
-- ✅ Explicar el código línea por línea si el profesor lo solicita
-- ✅ Demostrar confianza en el dominio del tema
-- ✅ Destacar las diferencias entre ambos problemas
-
-### **Posibles preguntas del profesor:**
-1. **"¿Por qué usamos programación lineal?"** → Porque las restricciones y función objetivo son lineales
-2. **"¿Qué diferencias hay entre ambos problemas?"** → Uno tiene recursos desequilibrados, otro equilibrados
-3. **"¿Cómo verificamos que es la solución óptima?"** → PuLP usa algoritmos probados como el simplex
-4. **"¿Qué otras aplicaciones tiene?"** → Logística, producción, finanzas, etc.
-5. **"¿Por qué la solución del segundo problema es simétrica?"** → Porque ambas restricciones son igualmente limitantes
-
-### **Tiempo estimado por sección:**
-- Apertura: 2 min
-- Introducción: 1 min
-- Objetivos: 1 min
-- Problema 1: 15 min
-- Problema 2: 15 min
-- Conclusiones: 2 min
-- Cierre: 1 min
-
-**TOTAL: 30 minutos**
-
----
-
-## 🎯 **PUNTOS CLAVE A DESTACAR**
-
-1. **Dominio técnico:** Conocimiento profundo de Python y PuLP
-2. **Análisis crítico:** Identificación de mejoras y limitaciones en ambos problemas
-3. **Visualización:** Comprensión gráfica de ambos problemas
-4. **Aplicabilidad:** Relevancia en diferentes contextos empresariales
-5. **Metodología:** Enfoque sistemático y profesional
-6. **Comparación:** Análisis de diferencias entre problemas
-
-**¡ÉXITO ASEGURADO! 🚀** 
+**¡PRESENTACIÓN COMPLETA Y PROFESIONAL! 🚀** 
