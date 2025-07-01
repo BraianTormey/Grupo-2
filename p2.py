@@ -114,6 +114,5 @@ plt.tight_layout()
 # Mostrar el gráfico
 plt.show()
 
-"""Mejoras, como no sobra material es dificil pensar mejoras, podrian ser aumentar el stock o rediseñar las joyas para que usen menos recursos pero es dificl de plantear
-
+"""Mejoras,aumentar stock
 """

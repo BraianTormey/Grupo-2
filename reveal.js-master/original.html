@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Paquetes Escolares - Programación Lineal</title>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js/dist/theme/night.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <h2>Grupo 2</h2>
+        <p>Dante Passone<br>Braian Tormey</p>
+      </section>
+
+      <section>
+        <h3> Enunciado del problema</h3>
+        <p>
+         Con el comienzo del curso se van a lanzar unas ofertas de material escolar. Unos almacenes quieren ofrecer 600 cuadernos, 500 carpetas y 400 bolígrafos para la oferta, empaquetándolo de dos formas distintas: en el primer bloque pondrán 2 cuadernos, 1 carpeta y 2 bolígrafos; en el segundo, pondrán 3 cuadernos, 1 carpeta y 1 bolígrafo. Los precios de cada paquete serán de 6,5 euros y 7 euros, respectivamente.
+        ¿Cuántos paquetes les conviene hacer de cada tipo para obtener los máximos beneficios?
+      </section>
+
+      <section>
+        <section>
+              <h3> Datos identificados</h3>
+              <ul>
+                <li class="fragment" ><strong>Stock disponible:</strong>
+                  <ul>
+                    <li>600 cuadernos</li>
+                    <li>500 carpetas</li>
+                    <li>400 bolígrafos</li>
+                  </ul>
+                </li>
+                <li class="fragment"><strong>Paquete tipo 1:</strong> 2 cuadernos, 1 carpeta, 2 bolígrafos, precio: €6,5</li>
+                <li class="fragment"><strong>Paquete tipo 2:</strong> 3 cuadernos, 1 carpeta, 1 bolígrafo, precio: €7</li>
+              </ul>
+              <p class="fragment"> El objetivo es <strong>maximizar la ganancia</strong> respetando el stock disponible.</p>
+        </section>
+      <section>
+              <h3> Límites y restricciones</h3>
+            <ul>
+              <li class="fragment">2x + 3y ≤ 600<br><small>La cantidad de cuadernos que uses entre los dos tipos de paquetes no puede pasar los 600.</small></li>
+              <li class="fragment">x + y ≤ 500<br><small>No puedo usar más de 500 carpetas entre todos los paquetes.</small></li>
+              <li class="fragment">2x + y ≤ 400<br><small>La suma de todos los bolígrafos usados tiene que ser como mucho 400.</small></li>
+              <li class="fragment">x ≥ 0 y y ≥ 0<br><small>Restricción de no negatividad: no se pueden fabricar cantidades negativas.</small></li>
+            </ul>
+      </section>
+   </section>
+ <section>
+  <section>
+  <h3>Resolviendo con Python</h3>
+  <p>
+    Ahora, utilizando <strong>Python</strong> y haciendo uso de la librería <code>PuLP</code>,
+    que sirve para modelar y resolver problemas de optimización mediante <strong>programación lineal</strong>, vamos a buscar la solución óptima.
+  </p>
+  <img src="logo_python.png" alt="Logo de Python" style="width: 300px; margin-top: px;">
+</section>
+
+  <section>
+    <h4>Preparar el entorno</h4>
+    <pre><code class="language-python">
+# Paso 1: Instalar PuLP
+!pip install pulp
+
+# Paso 2: Importar la librería
+import pulp
+    </code></pre>
+  </section>
+<section>
+  <h4 style="font-size: 1.5em;"> Definir el modelo en Python</h4>
+
+  <div class="fragment">
+    <p style="font-size: 0.9em;"><strong>Paso 3:</strong> Crear el problema de maximización</p>
+    <pre><code class="language-python" style="font-size: 0.9em;">
+problema = pulp.LpProblem("Problema_Paquetes_Escolares", pulp.LpMaximize)
+    </code></pre>
+  </div>
+
+  <div class="fragment">
+    <p style="font-size: 0.9em;"><strong>Paso 4:</strong> Definir las variables de decisión</p>
+    <pre><code class="language-python" style="font-size: 0.7em;">
+x = pulp.LpVariable('Paquetes_Tipo_1', lowBound=0, cat='Integer')  # cantidad de paquetes tipo 1
+y = pulp.LpVariable('Paquetes_Tipo_2', lowBound=0, cat='Integer')  # cantidad de paquetes tipo 2
+    </code></pre>
+  </div>
+
+  <div class="fragment">
+    <p style="font-size: 0.9em;"><strong>Paso 5:</strong> Definir la función objetivo</p>
+    <pre><code class="language-python" style="font-size: 1em;">
+problema += 6.5 * x + 7 * y, "Ganancia_Total"
+    </code></pre>
+  </div>
+</section>
+<section>
+  <h4 style="font-size: 1.5em;">Restricciones y resolución</h4>
+
+  <div class="fragment">
+    <p style="font-size: 0.9em;"><strong>Paso 6:</strong> Agregar las restricciones</p>
+    <pre><code class="language-python" style="font-size: 1em;">
+problema += 2 * x + 3 * y <= 600, "Restriccion_Cuadernos"
+problema += x + y <= 500, "Restriccion_Carpetas"
+problema += 2 * x + y <= 400, "Restriccion_Bolígrafos"
+    </code></pre>
+  </div>
+
+  <div class="fragment">
+    <p style="font-size: 0.9em;"><strong>Paso 7:</strong> Resolver el problema</p>
+    <pre><code class="language-python" style="font-size: 1em;">
+problema.solve()
+    </code></pre>
+  </div>
+</section>
+</section>
+
+
+<section>
+  
+  <section>
+    <h4 style="font-size: 1.5em;"> Ver el resultado</h4>
+
+    <div class="fragment">
+      <p style="font-size: 0.9em;"><strong>Paso 8:</strong> Mostrar los resultados</p>
+      <pre><code class="language-python" style="font-size: 0.8em;">
+if pulp.LpStatus[problema.status] == "Optimal":
+    print(" Solución óptima encontrada:")
+    print(f" Paquetes tipo 1 a fabricar: {x.varValue}")
+    print(f" Paquetes tipo 2 a fabricar: {y.varValue}")
+    print(f" Ganancia total: €{pulp.value(problema.objective):.2f}")
+else:
+    print(" No se encontró una solución óptima.")
+      </code></pre>
+    </div>
+  </section>
+
+  <section>
+    <h4> Solucion optima obtenida</h4>
+    <ul style="font-size: 1.2em;">
+      <li> Paquetes tipo 1 a fabricar: <strong>150.0</strong></li>
+      <li> Paquetes tipo 2 a fabricar: <strong>100.0</strong></li>
+      <li> Ganancia total: <strong>€1675.00</strong></li>
+    </ul>
+  </section>
+
+  <section>
+    <h5>Visualización gráfica del problema</h5>
+
+    <p style="font-size: 0.7em;">
+      Este gráfico muestra las restricciones, la región factible, la solución óptima y el punto donde se alcanza la ganancia máxima.
+    </p>
+
+    <p style="font-size: 0.6em; margin-top: 10px;">
+      <span style="color: #2980b9;"><strong>Cuadernos</strong></span> — 
+      <span style="color: #e67e22;"><strong>Carpetas</strong></span> — 
+      <span style="color: #27ae60;"><strong>Bolígrafos</strong></span>
+    </p>
+
+    <img src="grafico_paquetes.png" 
+         alt="Gráfico del problema de paquetes" 
+         style="max-width: 80%; margin-top: 20px; border: 3px solid #444; border-radius: 8px;">
+  </section>
+</section>
+
+<section>
+    <section>
+      <h4>Posibles mejoras</h4>
+
+      <p style="font-size: 0.9em;">
+        una mejora podria ser <strong>aumentar el stock de bolígrafos</strong> (+50), siendo que este es el recurso más limitado.
+        Aumentarlo permitiría crear más <strong>paquetes del tipo 1</strong>, que son los que más ganancia dan.
+      </p>
+
+      <img src="captura_excel_stock.png" 
+          alt="Captura de Excel con nuevo stock" 
+          style="max-width: 80%; margin-top: 20px; border: 2px solid #aaa; border-radius: 6px;">
+    </section>
+
+     <section>
+        <h5>Gráfico actualizado</h5>
+        <img src="solucion_450.png" 
+            alt="Gráfico con bolígrafos aumentados" 
+            style="max-width: 80%; margin-top: 20px; border: 3px solid #444; border-radius: 8px;">
+      </section>
+<section>
+      <h4>Recorte de stock</h4>
+
+      <p style="font-size: 0.9em;">
+        En ambos casos se observa <strong>un gran sobrante de carpetas. </strong> Reducir su cantidad no generaría más ganancias, pero sí permitiría 
+        <strong>ahorrar costos</strong>, tanto en la compra como en el almacenamiento.
+      </p>
+
+      <img src="captura_excel_carpetas.png" 
+          alt="Captura de Excel con nuevo stock" 
+          style="max-width: 80%; margin-top: 20px; border: 2px solid #aaa; border-radius: 6px;">
+    </section>
+    <section>
+        <h5>Gráfico actualizado</h5>
+        <img src="solucion_250.png" 
+            alt="Gráfico con menos carpetas (250)" 
+            style="max-width: 80%; margin-top: 20px; border: 3px solid #444; border-radius: 8px;">
+      </section>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+  <script src="https://unpkg.com/reveal.js/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize();
+  </script>
+</body>
+</html>
