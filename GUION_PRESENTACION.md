@@ -3,61 +3,64 @@
 
 ---
 
-## APERTURA (2 minutos)
+## APERTURA
 
-Buenos días. Somos Dante Passone y Braian Tormey del Grupo 2, y hoy vamos a demostrar cómo la programación lineal puede transformar problemas empresariales complejos en soluciones óptimas mediante el uso de Python y PuLP.
-
-La programación lineal es una técnica matemática fundamental en investigación operativa que nos permite encontrar la mejor manera de asignar recursos limitados para maximizar o minimizar una función objetivo, siempre respetando un conjunto de restricciones lineales.
-
-En esta presentación, resolveremos dos problemas completamente diferentes: uno de logística educativa y otro de manufactura artesanal, demostrando la versatilidad y poder de esta metodología.
+- Presentamos dos ejercicios de optimización usando programación lineal y Python.
+- El objetivo es mostrar cómo resolver problemas reales maximizando beneficios bajo restricciones.
 
 ---
 
-## PROBLEMA 1: PAQUETES ESCOLARES (12 minutos)
+## EJERCICIO 2: PAQUETES ESCOLARES
 
-### Enunciado (2 minutos)
+### Portada
+- Mostramos el título: "Paquetes Escolares" y el número de ejercicio.
+- El subtítulo indica que vamos a maximizar el beneficio de los paquetes.
+- Los íconos representan los recursos: cuadernos, carpetas, bolígrafos y el beneficio.
 
-Nuestro primer caso de estudio aborda un problema real de logística educativa. Unos almacenes quieren optimizar su oferta de material escolar para el inicio del curso académico.
+### Enunciado
+- Se explica el problema: hay que armar paquetes escolares usando el stock disponible.
+- Hay dos tipos de paquetes, cada uno con distinta composición y precio.
+- El objetivo es decidir cuántos paquetes de cada tipo fabricar para ganar lo máximo posible.
 
-Disponen de un stock limitado: 600 cuadernos, 500 carpetas y 400 bolígrafos. El desafío es decidir cuántos paquetes de cada tipo fabricar para maximizar los ingresos, considerando que cada paquete tiene una composición específica y un precio de venta determinado.
+### Datos y Stock
+- Se muestra el stock disponible: 600 cuadernos, 500 carpetas, 400 bolígrafos.
+- El objetivo es maximizar la ganancia respetando estos límites.
 
-Este tipo de problema es típico en la gestión de inventarios y planificación de producción, donde debemos equilibrar la demanda del mercado con las limitaciones de recursos disponibles.
+### Restricciones
+- Se presentan las restricciones:
+  - Cuadernos: 2x + 3y ≤ 600
+  - Carpetas: x + y ≤ 500
+  - Bolígrafos: 2x + y ≤ 400
+  - No negatividad: x ≥ 0, y ≥ 0
+- Cada restricción asegura que no se use más stock del disponible.
 
-### Modelo Matemático (3 minutos)
+### Región factible
+- La región factible es el área de solución: todas las combinaciones posibles de paquetes que cumplen todas las restricciones.
+- En el gráfico, es el área sombreada o polígono donde se pueden encontrar soluciones válidas.
 
-Para modelar este problema, definimos dos variables de decisión: x representa la cantidad de paquetes tipo 1, e y la cantidad de paquetes tipo 2. Estas son nuestras variables de control.
+### Implementación en Python
+- Se explica que usamos Python y la librería PuLP para modelar el problema.
+- Paso a paso:
+  - Se instala PuLP.
+  - Se importan las librerías.
+  - Se crea el problema de maximización.
+  - Se definen las variables de decisión: x (paquetes tipo 1), y (paquetes tipo 2).
+  - Se define la función objetivo: 6.5x + 7y.
+  - Se agregan las restricciones.
+  - Se resuelve el problema con el solver.
+  - Se muestran los resultados: cuántos paquetes de cada tipo fabricar y la ganancia máxima.
 
-La función objetivo que queremos maximizar es 6.5x + 7y, que representa el ingreso total. Cada coeficiente corresponde al precio de venta de cada tipo de paquete.
+### Resultados y Gráfico
+- Se muestra la solución óptima: 150 paquetes tipo 1 y 100 paquetes tipo 2, ganancia total 1.675 euros.
+- El gráfico muestra la región factible y la solución óptima.
+- Aclarar: la solución óptima ocurre cuando la función objetivo (la línea de ganancia máxima) pasa por uno de los vértices del área de solución.
+- Es decir, siempre que maximizamos, la mejor solución está en un vértice de la región factible.
 
-Las restricciones surgen de las limitaciones físicas del stock. Para los cuadernos: 2x + 3y ≤ 600. Esta restricción asegura que no excedamos la disponibilidad de cuadernos, considerando que cada paquete tipo 1 usa 2 cuadernos y cada paquete tipo 2 usa 3.
+---
 
-Similarmente, para las carpetas: x + y ≤ 500, ya que ambos tipos de paquetes usan exactamente una carpeta. Para los bolígrafos: 2x + y ≤ 400, donde el tipo 1 usa 2 bolígrafos y el tipo 2 usa solo 1.
-
-Finalmente, las restricciones de no negatividad x ≥ 0, y ≥ 0 son fundamentales porque no podemos fabricar cantidades negativas de paquetes.
-
-### Implementación en Python (4 minutos)
-
-Ahora implementaremos este modelo usando Python y PuLP. PuLP es una biblioteca especializada en programación lineal que implementa algoritmos eficientes como el método simplex para encontrar soluciones óptimas.
-
-Primero, creamos un objeto LpProblem con el nombre 'Paquetes_Escolares' y especificamos que queremos maximizar la función objetivo. Esto inicializa el solver interno de PuLP.
-
-Definimos nuestras variables de decisión usando LpVariable. El parámetro lowBound=0 establece el límite inferior, cat='Integer' especifica que queremos soluciones enteras, lo cual es crucial en este contexto porque no podemos fabricar fracciones de paquetes.
-
-La función objetivo se define simplemente sumando los términos 6.5*x + 7*y. PuLP automáticamente reconoce esto como la función a maximizar.
-
-Las restricciones se agregan una por una usando el operador +=. Cada restricción tiene un nombre descriptivo que nos ayuda a identificar cuál es la limitación activa en la solución final.
-
-El método solve() ejecuta el algoritmo de optimización. PuLP internamente convierte nuestro problema a forma estándar y aplica el método simplex, que es matemáticamente garantizado para encontrar la solución óptima global si existe.
-
-### Resultados y Análisis (3 minutos)
-
-La solución óptima encontrada es: 150 paquetes tipo 1 y 100 paquetes tipo 2, generando un ingreso total de 1.675 euros.
-
-Este resultado es matemáticamente óptimo, lo que significa que no existe ninguna otra combinación factible que genere mayor ingreso respetando todas las restricciones.
-
-El gráfico muestra la región factible como un polígono convexo. La solución óptima se encuentra en un vértice de este polígono, lo cual es una propiedad fundamental de la programación lineal: las soluciones óptimas siempre ocurren en los vértices de la región factible.
-
-Observamos que la restricción de bolígrafos es activa en la solución óptima, lo que significa que este recurso es el factor limitante. Las carpetas tienen un exceso significativo, indicando una oportunidad de optimización del inventario.
+## ACLARACIONES CLAVE
+- Región factible = área de solución: todas las combinaciones posibles que cumplen las restricciones.
+- Solución óptima: ocurre en un vértice de la región factible, donde la función objetivo es máxima.
 
 ---
 
@@ -161,5 +164,143 @@ Gracias por su atención. ¿Hay alguna pregunta sobre nuestro trabajo o sobre la
 4. **Metodología sistemática:** Enfoque estructurado desde modelado hasta implementación
 5. **Pensamiento analítico:** Capacidad de interpretar resultados y extraer insights
 6. **Comunicación técnica:** Explicación clara de conceptos complejos
+
+**¡PRESENTACIÓN COMPLETA Y PROFESIONAL! 🚀**
+
+---
+
+## POSIBLES PREGUNTAS Y RESPUESTAS RÁPIDAS
+
+**¿Qué es la región factible?**
+- Es el área donde se cumplen todas las restricciones.
+
+**¿Por qué la solución óptima está en un vértice?**
+- Porque en programación lineal, el máximo o mínimo siempre se da en un vértice del área de solución.
+
+**¿Qué pasa si cambio el stock de un recurso?**
+- Puede cambiar la solución óptima y la ganancia máxima.
+
+**¿Por qué usamos variables enteras?**
+- Porque no se pueden fabricar fracciones de paquetes o joyas.
+
+**¿Qué hace PuLP?**
+- Resuelve problemas de optimización lineal de forma automática.
+
+**¿Qué significa una restricción activa?**
+- Es la que se cumple como igualdad en la solución óptima, limita el resultado.
+
+**¿Qué es la función objetivo?**
+- Es la fórmula que queremos maximizar o minimizar (la ganancia total).
+
+**¿Qué pasa si hay más de un vértice óptimo?**
+- Hay varias soluciones óptimas, todas dan el mismo valor máximo.
+
+**¿Qué representa el gráfico?**
+- Muestra el área de soluciones posibles y el punto óptimo.
+
+**¿Por qué hay recursos que sobran?**
+- Porque no siempre todos los recursos se usan al máximo en la solución óptima.
+
+**¿Se puede usar este método para otros problemas?**
+- Sí, sirve para cualquier problema con restricciones y objetivo lineal.
+
+**¿Qué pasa si una restricción no se cumple?**
+- La solución no es válida, debe estar dentro del área de solución.
+
+**¿Por qué es importante la no negatividad?**
+- Porque no se pueden fabricar cantidades negativas.
+
+**¿Qué significa sensibilidad o análisis de mejoras?**
+- Ver cómo cambian los resultados si cambian los datos del problema.
+
+**¿Por qué usamos Python?**
+- Porque es fácil, rápido y tiene librerías como PuLP para optimización.
+
+**¿Qué significa maximizar y minimizar en programación lineal?**
+- Maximizar es buscar el mayor valor posible de la función objetivo; minimizar es buscar el menor.
+
+**¿Qué pasa si no hay solución factible?**
+- El modelo no tiene ninguna combinación que cumpla todas las restricciones.
+
+**¿Qué es una variable de decisión?**
+- Es lo que queremos calcular, por ejemplo, cuántos paquetes o joyas fabricar.
+
+**¿Qué es una restricción redundante?**
+- Es una restricción que no afecta la región factible porque ya está cubierta por otras.
+
+**¿Qué pasa si cambio el precio de venta?**
+- Puede cambiar la función objetivo y la solución óptima.
+
+**¿Por qué a veces la solución óptima no usa todo el stock?**
+- Porque otra restricción se vuelve limitante antes de agotar todos los recursos.
+
+**¿Qué significa 'entero' en las variables?**
+- Que solo se permiten valores sin decimales (no fraccionarios).
+
+**¿Qué hago si el solver da un resultado decimal y necesito enteros?**
+- Se debe usar variables de tipo entero en el modelo.
+
+**¿Qué es el método simplex?**
+- Es un algoritmo que encuentra la solución óptima en programación lineal.
+
+**¿Qué errores comunes hay al modelar?**
+- Plantear mal las restricciones, olvidar la no negatividad, o no definir bien la función objetivo.
+
+**¿Cómo interpreto el gráfico si hay más de dos variables?**
+- No se puede graficar fácilmente, pero el método sigue siendo válido.
+
+**¿Qué significa que una variable valga cero en la solución?**
+- Que no conviene fabricar ese tipo de producto en la solución óptima.
+
+**¿Qué pasa si todas las restricciones son inactivas?**
+- No es posible, siempre al menos una es activa en la solución óptima.
+
+**¿Por qué a veces hay varias soluciones óptimas?**
+- Porque la función objetivo es paralela a una arista de la región factible.
+
+**¿Qué es el análisis de sensibilidad?**
+- Es ver cómo cambian los resultados si cambian los datos del problema.
+
+**¿Qué pasa si cambio una restricción por un valor menor?**
+- La región factible se achica y puede cambiar la solución óptima.
+
+**¿Qué significa 'solver'?**
+- Es el programa que resuelve el modelo matemático.
+
+**¿Por qué usamos PuLP y no Excel?**
+- PuLP es más flexible, permite automatizar y manejar problemas más grandes.
+
+**¿Qué hago si el modelo tarda mucho en resolver?**
+- Revisar si el problema es muy grande o si hay errores en la formulación.
+
+**¿Se puede usar para problemas de minimización de costos?**
+- Sí, solo hay que cambiar la función objetivo a minimizar.
+
+**¿Qué significa 'no acotado'?**
+- Que la función objetivo puede crecer indefinidamente, falta alguna restricción.
+
+**¿Qué hago si el resultado no tiene sentido práctico?**
+- Revisar el modelo, los datos y las restricciones.
+
+**¿Qué es una solución factible?**
+- Es cualquier combinación de variables que cumple todas las restricciones.
+
+**¿Por qué es importante interpretar los resultados?**
+- Para tomar decisiones correctas y entender el impacto de cada restricción.
+
+**¿Qué pasa si cambio el tipo de variable a continua?**
+- El solver puede dar soluciones con decimales, útiles en otros contextos.
+
+**¿Qué es una función lineal?**
+- Es una función donde las variables solo aparecen multiplicadas por constantes y sumadas.
+
+**¿Por qué la programación lineal es útil en empresas?**
+- Permite optimizar recursos y maximizar ganancias o minimizar costos de forma sistemática.
+
+**¿Se puede usar para planificar horarios o rutas?**
+- Sí, siempre que el problema se pueda expresar con restricciones y objetivo lineal.
+
+**¿Qué hago si el modelo no refleja la realidad?**
+- Ajustar las restricciones o la función objetivo para que representen mejor el problema real.
 
 **¡PRESENTACIÓN COMPLETA Y PROFESIONAL! 🚀** 
